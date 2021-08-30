@@ -13,7 +13,6 @@ import { useState } from 'react';
 
 const Header = (props) => {
 	const { classes, session } = props;
-	console.log(session);
 	const [logged, setLogged] = useState(!!session);
 	const [showLogin, setShowLogin] = useState(false);
 

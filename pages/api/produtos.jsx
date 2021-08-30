@@ -52,7 +52,6 @@ const handleGet = async (req, res) => {
 const handlePost = async (req, res) => {
   const values = filterFieldsByModel(getJson(req.body));
   if (!values) {
-    console.log('values error', error)
     return error({req, res, status: 500, message: 'Products error in data provided!'})
   }
   const result = await lowDb.insertData(

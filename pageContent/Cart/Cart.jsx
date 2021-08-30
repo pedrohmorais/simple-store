@@ -24,8 +24,6 @@ const toMoney = (n) => {
 }
 
 const Home = ({ classes, session }) => { 
-  console.log('sessionS', session);
-
   const [produtos, setProdutos] =  React.useState([]);
 
   useEffect(() => {
