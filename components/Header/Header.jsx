@@ -144,7 +144,7 @@ const Header = (props) => {
 				<Grid item xs={6} style={{ justifyContent: 'flex-end', display: 'flex' }}>
 					{renderAdminMenu()}
 					{logged && <Button onClick={() => logout()}>
-						Loggout
+						Logout
 					</Button>}
 					{!logged && <Button id="loginHeaderButton" onClick={() => setShowLogin(true)}>
 						Login
