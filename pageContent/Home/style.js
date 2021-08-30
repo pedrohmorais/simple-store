@@ -19,7 +19,7 @@ const style = (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    height: '160px',
+    height: '360px',
     display: 'flex',
     justifyContent: 'space-between',
     padding: '16px',

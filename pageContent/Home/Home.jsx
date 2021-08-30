@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import CardMedia from '@material-ui/core/CardMedia';
+import imagePlaceholder from '../../utils/imagePlaceholder';
+
 import { addProductToCart, hasCart } from '../../services/cartService';
 
 const toMoney = (n) => {
@@ -84,6 +87,7 @@ const Home = ({ classes, session }) => {
       id,
       nome,
       preco,
+      imagem,
     } = produto;
 
     return (
@@ -92,6 +96,11 @@ const Home = ({ classes, session }) => {
           <h2 className="title">
             {nome}
           </h2>
+          <CardMedia
+            style={{ width: '100%', height: '160px'}}
+            image={imagem || imagePlaceholder}
+            title={nome}
+          />
           <Typography variant="h6" gutterBottom>
             R$ {toMoney(preco)}
           </Typography>
