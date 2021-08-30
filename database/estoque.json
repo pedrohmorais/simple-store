@@ -1,0 +1,16 @@
+[
+  {
+    "id": "23d8fa1b-38c0-400a-80d0-e2da89a97bc3",
+    "productId": "0bd2f02e-5c01-49c6-9360-3c1e07395e10",
+    "productName": "Banana",
+    "precoCompra": "5",
+    "quantidadeComprada": "100"
+  },
+  {
+    "id": "9423ca88-fd94-4084-9f26-78837990840f",
+    "productId": "0bd2f02e-5c01-49c6-9360-3c1e07395e10",
+    "productName": "Banana",
+    "precoCompra": "10",
+    "quantidadeComprada": "100"
+  }
+]

@@ -1,14 +1,18 @@
 import React from 'react'
 import ProdutosContent from '../../pageContent/cadastro/Produtos'
+import { getAuthSession } from '../../services/auth';
 
-const Produtos = () => {
+const Produtos = ({ session }) => {
   return (
-    <ProdutosContent />
+    <ProdutosContent session={session} />
   )
 }
 
-Produtos.getInitialProps = () => {
-  return { title: 'Loja de frutas' }
+export async function getServerSideProps({ req }) {
+  const session = getAuthSession(req);
+  return {
+    props: { title: 'Produtos - Loja de frutas', session },
+  };
 }
 
 export default Produtos

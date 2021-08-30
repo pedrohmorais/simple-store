@@ -14,10 +14,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import CropFree from '@material-ui/icons/CropFree';
 import Modal from '../../../components/Modal';
 import Typography from '@material-ui/core/Typography';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import produtosService from '../../../services/api/produtos';
@@ -127,10 +125,25 @@ const Produtos = ({ classes }) => {
       });
   }
 
+  const loadImage = async () => {
+    return new Promise((resolve, reject) => {
+      var fileInput = document.querySelector('input[type=file]');
+      var reader = new FileReader();
+      reader.readAsDataURL(fileInput.files[0]);
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = function () {
+        reject(null);
+      };
+    });
+  }
   
-  const handleEdit = (event) => {
+  const handleEdit = async (event) => {
     const formValues = getSubmitValues(event);
     formValues.id = selectedProduct.id;
+
+    formValues.imagem = await loadImage();
     produtosService.updateProduto(formValues)
       .then(r => {
         if(r && r.data) {
@@ -146,12 +159,6 @@ const Produtos = ({ classes }) => {
       });
   }
 
-  const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      event.preventDefault();
-    }
-  }
-
   const formAdd = (
     <form className={`${classes.root} ${classes.modalContent}`} autoComplete="off" onSubmit={handleSubmit}>
       <Grid container spacing={3}>
@@ -160,6 +167,19 @@ const Produtos = ({ classes }) => {
         </Grid>        
         <Grid item xs={12}>
           <TextField name="nome" label="Nome do produto" required/>
+        </Grid>
+        <Grid item xs={12}>
+        <Button
+          variant="contained"
+          component="label"
+        >
+          Imagem do produto
+          <input
+            type="file"
+            name="imagem"
+            hidden
+          />
+        </Button>
         </Grid>
         <Grid item xs={12}>
           <TextField name="preco" label="Preço" type="number" defaultValue="0" required/>
@@ -195,6 +215,17 @@ const Produtos = ({ classes }) => {
         <Grid item xs={12}>
           <TextField defaultValue={selectedProduct?.nome} name="nome" label="Nome do produto" required/>
         </Grid>
+        <Button
+          variant="contained"
+          component="label"
+        >
+          Imagem do produto
+          <input
+            type="file"
+            name="imagem"
+            hidden
+          />
+        </Button>
         <Grid item xs={12}>
           <TextField defaultValue={selectedProduct?.preco} name="preco" label="Preço" type="number" required/>
         </Grid>

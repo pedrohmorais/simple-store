@@ -16,7 +16,7 @@
 /build
 
 #databases
-/database/*.json
+# /database/*.json
 
 # misc
 .DS_Store

@@ -1,14 +1,18 @@
 import React from 'react'
 import EstoqueContent from '../../pageContent/cadastro/Estoque'
+import { getAuthSession } from '../../services/auth';
 
-const Estoque = () => {
+const Estoque = ({ session }) => {
   return (
-    <EstoqueContent />
+    <EstoqueContent session={session} />
   )
 }
 
-Estoque.getInitialProps = () => {
-  return { title: 'Loja de frutas' }
+export async function getServerSideProps({ req }) {
+  const session = getAuthSession(req);
+  return {
+    props: { title: 'Estoque - Loja de frutas', session },
+  };
 }
 
 export default Estoque

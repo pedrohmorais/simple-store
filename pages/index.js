@@ -2,9 +2,9 @@ import React from 'react';
 import HomeContent from '../pageContent/Home';
 import { getAuthSession } from '../services/auth';
 
-const Home = (props) => {
+const Home = ({ session }) => {
   return (
-    <HomeContent session={props} />
+    <HomeContent session={session} />
   )
 }
 
