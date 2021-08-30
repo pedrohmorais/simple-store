@@ -16,22 +16,17 @@ const style = (theme) => ({
     flexWrap: 'wrap',
   },
   productCard: {
-    flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    height: '160px',
+    minHeight: '120px',
+    flexWrap: 'wrap',
     display: 'flex',
     justifyContent: 'space-between',
     padding: '16px',
   },
   searchForm: {
     margin: '12px 0 24px',
-  },
-  floatButton: {
-    position: 'fixed',
-    right: '20px',
-    bottom: '20px',
-  },
+  }
   
 });
 

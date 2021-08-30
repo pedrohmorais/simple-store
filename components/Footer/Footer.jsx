@@ -8,7 +8,7 @@ const Footer = ({ classes }) => {
 	return (
 		<footer className={`${classes.root}`}>
 			<Container>
-				#nomeComercio
+				Loja de frutas
 			</Container>
 		</footer>
 	)

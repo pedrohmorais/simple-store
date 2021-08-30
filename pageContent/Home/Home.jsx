@@ -1,9 +1,9 @@
 import { withStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container';
+import Fab from '@material-ui/core/Fab';
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import style from './style'
-import { getProviders, getSession } from 'next-auth/client';
 import produtosService from '../../services/api/produtos';
 import estoqueService from '../../services/api/estoque';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import { addProductToCart, hasCart } from '../../services/cartService';
 
 const toMoney = (n) => {
   if (!n || !Number(n)) {
@@ -22,10 +23,9 @@ const toMoney = (n) => {
 }
 
 const Home = ({ classes, session }) => { 
-  console.log('foi', session);
-
   const [produtos, setProdutos] =  React.useState([]);
   const [produtosEstoque, setProdutosEstoque] =  React.useState([]);
+  const [, setShowCart] = React.useState();
 
   useEffect(() => {
     getProdutosEstoque();
@@ -70,9 +70,16 @@ const Home = ({ classes, session }) => {
     setProdutos(produtosComEstoque);
   }
 
+  const addToCart = (product) => {
+    addProductToCart({
+      ...product,
+      amount: 1,
+    });
+    alert('Produto adicionado com sucesso!');
+    setShowCart(true);
+  }
 
-
-  const renderProductCard = (produto) => {
+  const renderProductCard = (produto, key) => {
     const {
       id,
       nome,
@@ -80,7 +87,7 @@ const Home = ({ classes, session }) => {
     } = produto;
 
     return (
-      <Grid component="li" item xs={6} sm={3}>
+      <Grid component="li" item key={key} xs={6} sm={3}>
         <Paper className={classes.productCard} key={id}>
           <h2 className="title">
             {nome}
@@ -93,7 +100,7 @@ const Home = ({ classes, session }) => {
             color="primary"
             startIcon={<ShoppingCartIcon />}
             type="button"
-            onClick={()=>searchProductByName()}
+            onClick={()=>addToCart(produto)}
           >
             COMPRAR
           </Button>
@@ -130,9 +137,7 @@ const Home = ({ classes, session }) => {
     <Grid
       container
       direction="row"
-      justifyContent="center"
       alignItems="center"
-      xs={12}
       className={classes.searchForm}
     >
       <TextField
@@ -152,7 +157,21 @@ const Home = ({ classes, session }) => {
         Buscar
       </Button>
     </Grid>
-  )
+  );
+
+  const floatButtonCart = () => {
+    if (!produtos || !produtos[0] || !hasCart()) {
+      return null;
+    }
+
+    return (
+      <Link href="/cart">
+        <Fab color="primary" className={classes.floatButton} aria-label="deletar">
+          <ShoppingCartIcon />
+        </Fab>
+      </Link>
+    );
+  }
 
 	return (
 		<Container className={`${classes.root}`}>
@@ -163,9 +182,10 @@ const Home = ({ classes, session }) => {
 				<h1>Compre suas frutas aqui</h1>
         {searchForm}
         {renderProducts()}
+        {floatButtonCart()}
       </Grid>
     </Container>
 	)
 }
 	
-	export default withStyles(style)(Home)
+export default withStyles(style)(Home)

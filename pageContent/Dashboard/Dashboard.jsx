@@ -3,14 +3,12 @@ import Container from '@material-ui/core/Container';
 import React from 'react'
 import Link from 'next/link'
 import style from './style'
-import { getProviders, getSession } from 'next-auth/client';
 
-const Home = ({ classes, session }) => { 
-  console.log('foi', session)
+const Home = ({ classes }) => {
 	return (
 		<Container className={`${classes.root}`}>
       <section>
-				<h1>#nomeComercio</h1>
+				<h1>Loja de frutas</h1>
         <div className={classes.card}>
           <h2 className="title">
             Cadastro

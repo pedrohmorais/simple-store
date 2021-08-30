@@ -8,7 +8,7 @@ const Estoque = () => {
 }
 
 Estoque.getInitialProps = () => {
-  return { title: '#nomeComercio' }
+  return { title: 'Loja de frutas' }
 }
 
 export default Estoque

@@ -8,7 +8,7 @@ const Produtos = () => {
 }
 
 Produtos.getInitialProps = () => {
-  return { title: '#nomeComercio' }
+  return { title: 'Loja de frutas' }
 }
 
 export default Produtos

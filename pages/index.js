@@ -1,6 +1,6 @@
-import { getSession } from 'next-auth/client';
-import React, { useContext } from 'react'
-import HomeContent from '../pageContent/Home'
+import React from 'react';
+import HomeContent from '../pageContent/Home';
+import { getAuthSession } from '../services/auth';
 
 const Home = (props) => {
   return (
@@ -8,8 +8,8 @@ const Home = (props) => {
   )
 }
 
-Home.getInitialProps = async () => {
-  const session = await getSession();
+Home.getInitialProps = async ({ req }) => {
+  const session = getAuthSession(req);
   return { title: 'Home', session }
 }
 
